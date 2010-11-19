@@ -1,0 +1,193 @@
+#include <GL/gl.h>
+#include <stdint.h>
+#define OOO 0
+#define XOO 1
+#define XXO 3
+#define OXO 2
+#define OOX 4
+#define XOX 5
+#define OXX 6
+#define XXX 7
+#define A(a,b,c,d,e) a|b<<3|c<<6|d<<9|e<<12,
+static const uint16_t abc[]={
+	A(
+	XXX,
+	XOX,
+	XXX,
+	XOX,
+	XOX)
+	A(
+	XXX,
+	XOX,
+	XXO,
+	XOX,
+	XXX)
+	A(
+	XXX,
+	XOO,
+	XOO,
+	XOO,
+	XXX)
+	A(
+	XXO,
+	XOX,
+	XOX,
+	XOX,
+	XXO)
+	A(
+	XXX,
+	XOO,
+	XXX,
+	XOO,
+	XXX)
+	A(
+	XXX,
+	XOO,
+	XXX,
+	XOO,
+	XOO)
+	A(
+	XXX,
+	XOO,
+	XOX,
+	XOX,
+	XXX)
+	A(
+	XOX,
+	XOX,
+	XXX,
+	XOX,
+	XOX)
+	A(
+	XXX,
+	OXO,
+	OXO,
+	OXO,
+	XXX)
+	A(
+	OXX,
+	OOX,
+	OOX,
+	XOX,
+	XXX)
+	A(
+	XOX,
+	XOX,
+	XXO,
+	XOX,
+	XOX)
+	A(
+	XOO,
+	XOO,
+	XOO,
+	XOO,
+	XXX)
+	A(
+	XOX,
+	XXX,
+	XOX,
+	XOX,
+	XOX)
+	A(
+	XOX,
+	XOX,
+	XXX,
+	XOX,
+	XOX)
+	A(
+	XXX,
+	XOX,
+	XOX,
+	XOX,
+	XXX)
+	A(
+	XXO,
+	XOX,
+	XXO,
+	XOO,
+	XOO)
+	A(
+	XXX,
+	XOX,
+	XOX,
+	XXX,
+	OXO)
+	A(
+	XXO,
+	XOX,
+	XXO,
+	XOX,
+	XOX)
+	A(
+	XXX,
+	XOO,
+	XXX,
+	OOX,
+	XXX)
+	A(
+	XXX,
+	OXO,
+	OXO,
+	OXO,
+	OXO)
+	A(
+	XOX,
+	XOX,
+	XOX,
+	XOX,
+	XXX)
+	A(
+	XOX,
+	XOX,
+	XOX,
+	XOX,
+	OXO)
+	A(
+	XOX,
+	XOX,
+	XOX,
+	XXX,
+	XOX)
+	A(
+	XOX,
+	XOX,
+	OXO,
+	XOX,
+	XOX)
+	A(
+	XOX,
+	XOX,
+	OXO,
+	OXO,
+	OXO)
+	A(
+	XXX,
+	OOX,
+	XXX,
+	XOO,
+	XXX)
+};
+static void tfChar(int x,int y,int c){
+	for(int j=0;j<5;j++)
+		for(int i=0;i<3;i++)
+			if((abc[c]>>j*3)&1<<i)glVertex2i(x+i,y+j);
+}
+void tfDraw(int x,int y,char*s){
+	int xo=0;
+	glBegin(GL_POINTS);
+	for(;;s++){
+		switch(*s){
+		case 0:return;
+		case'\n':
+			xo=0;
+		case'\v':
+			y+=7;
+		continue;case'\t':
+			xo+=12;
+		continue;case'A'...'Z':tfChar(x+xo,y,*s-'A');
+		break;case'a'...'z':tfChar(x+xo,y,*s-'a');
+		}
+		xo+=6;
+	}
+	glEnd();
+}

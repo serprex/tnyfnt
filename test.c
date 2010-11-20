@@ -24,11 +24,6 @@ int main(int argc,char**argv){
 	glOrtho(0,256,256,0,1,-1);
 	glColor3ub(255,255,255);
 	for(;;){
-		#ifdef GLX
-		glXSwapBuffers(dpy,Wdo);
-		#else
-		SDL_GL_SwapBuffers();
-		#endif
 		glClear(GL_COLOR_BUFFER_BIT);
 		tfDraw(16,16,"0123456789\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n\tTNYFNT IS A TINY FONT LIBRARY\nASDF\tQWERTY\n\tASDF\t\tQWERTY");
 		#ifdef GLX

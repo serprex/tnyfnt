@@ -13,7 +13,6 @@
 #define XXOXX 2
 #define XXXXO 1
 #define XXXXX 0
-static const uint64_t row=0x4c41418a7359edff;
 #define A(a,b,c,d,e) a|b<<4,c|d<<4,e
 #define B(a,b,c,d,e) |a<<4,b|c<<4,d|e<<4,
 static const uint8_t abc[]={
@@ -234,17 +233,19 @@ static const uint8_t abc[]={
 	OOOOX,
 	OOOOX)
 };
-static void tfChar(int x,int y,int c){
+static void tfChar(int x,int y,char c){
 	for(int j=0;j<5;j++)
 		for(int i=0;i<5;i++)
-			if((row>>5*(abc[c*5+j>>1]>>(((c^j)&1)<<2)&15))&1<<i)glVertex2i(x+i,y+j);
+			if((0x4c41418a7359edff>>5*(abc[c*5+j>>1]>>(((c^j)&1)<<2)&15))&1<<i)glVertex2i(x+i,y+j);
 }
-void tfDraw(int x,int y,char*s){
+void tfDraw(int x,int y,const char*s){
 	int xo=0;
 	glBegin(GL_POINTS);
 	for(;;s++){
 		switch(*s){
-		case 0:return;
+		case 0:
+			glEnd();
+			return;
 		case'\n':
 			xo=0;
 		case'\v':
@@ -257,5 +258,4 @@ void tfDraw(int x,int y,char*s){
 		}
 		xo+=6;
 	}
-	glEnd();
 }

@@ -227,17 +227,19 @@ static const uint16_t abc[]={
 	OOX,
 	OOX)
 };
-static void tfChar(int x,int y,int c){
+static void tfChar(int x,int y,char c){
 	for(int j=0;j<5;j++)
 		for(int i=0;i<3;i++)
 			if(abc[c]&1<<i+j*3)glVertex2i(x+i,y+j);
 }
-void tfDraw(int x,int y,char*s){
+void tfDraw(int x,int y,const char*s){
 	int xo=0;
 	glBegin(GL_POINTS);
 	for(;;s++){
 		switch(*s){
-		case 0:return;
+		case 0:
+			glEnd();
+			return;
 		case'\n':
 			xo=0;
 		case'\v':
@@ -250,5 +252,4 @@ void tfDraw(int x,int y,char*s){
 		}
 		xo+=4;
 	}
-	glEnd();
 }

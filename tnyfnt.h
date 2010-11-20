@@ -1,2 +1,2 @@
 #pragma once
-void tfDraw(int,int,char*);
+void tfDraw(int,int,const char*);

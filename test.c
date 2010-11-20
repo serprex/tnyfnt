@@ -30,7 +30,7 @@ int main(int argc,char**argv){
 		SDL_GL_SwapBuffers();
 		#endif
 		glClear(GL_COLOR_BUFFER_BIT);
-		tfDraw(16,16,"ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n\tTNYFNT IS A TINY FONT LIBRARY\nASDF\tQWERTY\n\tASDF\t\tQWERTY");
+		tfDraw(16,16,"0123456789\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n\tTNYFNT IS A TINY FONT LIBRARY\nASDF\tQWERTY\n\tASDF\t\tQWERTY");
 		#ifdef GLX
 		glXSwapBuffers(dpy,Wdo);
 		XEvent ev;

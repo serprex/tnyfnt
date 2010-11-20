@@ -173,6 +173,66 @@ static const uint8_t abc[]={
 	XXXXX,
 	XOOOO,
 	XXXXX)
+	A(
+	XXXXX,
+	XOOOX,
+	XOXOX,
+	XOOOX,
+	XXXXX)
+	B(
+	OOXOO,
+	OOXOO,
+	OOXOO,
+	OOXOO,
+	OOXOO)
+	A(
+	XXXXX,
+	OOOOX,
+	XXXXX,
+	XOOOO,
+	XXXXX)
+	B(
+	XXXXX,
+	OOOOX,
+	XXXXX,
+	OOOOX,
+	XXXXX)
+	A(
+	XOOOX,
+	XOOOX,
+	XXXXX,
+	OOOOX,
+	OOOOX)
+	B(
+	XXXXX,
+	XOOOO,
+	XXXXX,
+	OOOOX,
+	XXXXX)
+	A(
+	XOOOO,
+	XOOOO,
+	XXXXX,
+	XOOOX,
+	XXXXX)
+	B(
+	XXXXX,
+	OOOOX,
+	OOOOX,
+	OOOOX,
+	OOOOX)
+	A(
+	XXXXX,
+	XOOOX,
+	XXXXX,
+	XOOOX,
+	XXXXX)
+	B(
+	XXXXX,
+	XOOOX,
+	XXXXX,
+	OOOOX,
+	OOOOX)
 };
 static void tfChar(int x,int y,int c){
 	for(int j=0;j<5;j++)
@@ -188,10 +248,11 @@ void tfDraw(int x,int y,char*s){
 		case'\n':
 			xo=0;
 		case'\v':
-			y+=7;
+			y+=6;
 		continue;case'\t':
 			xo+=12;
-		continue;case'A'...'Z':tfChar(x+xo,y,*s-'A');
+		continue;case'0'...'9':tfChar(x+xo,y,*s-'0'+26);
+		break;case'A'...'Z':tfChar(x+xo,y,*s-'A');
 		break;case'a'...'z':tfChar(x+xo,y,*s-'a');
 		}
 		xo+=6;

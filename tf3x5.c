@@ -37,13 +37,13 @@ static const uint16_t abc[]={
 	A(
 	XXX,
 	XOO,
-	XXX,
+	XXO,
 	XOO,
 	XXX)
 	A(
 	XXX,
 	XOO,
-	XXX,
+	XXO,
 	XOO,
 	XOO)
 	A(
@@ -166,11 +166,71 @@ static const uint16_t abc[]={
 	XXX,
 	XOO,
 	XXX)
+	A(
+	XXX,
+	XOX,
+	XOX,
+	XOX,
+	XXX)
+	A(
+	OXO,
+	OXO,
+	OXO,
+	OXO,
+	OXO)
+	A(
+	XXX,
+	OOX,
+	XXX,
+	XOO,
+	XXX)
+	A(
+	XXX,
+	OOX,
+	XXX,
+	OOX,
+	XXX)
+	A(
+	XOX,
+	XOX,
+	XXX,
+	OOX,
+	OOX)
+	A(
+	XXX,
+	XOO,
+	XXX,
+	OOX,
+	XXX)
+	A(
+	XOO,
+	XOO,
+	XXX,
+	XOX,
+	XXX)
+	A(
+	XXX,
+	OOX,
+	OOX,
+	OOX,
+	OOX)
+	A(
+	XXX,
+	XOX,
+	XXX,
+	XOX,
+	XXX)
+	A(
+	XXX,
+	XOX,
+	XXX,
+	OOX,
+	OOX)
 };
 static void tfChar(int x,int y,int c){
 	for(int j=0;j<5;j++)
 		for(int i=0;i<3;i++)
-			if((abc[c]>>j*3)&1<<i)glVertex2i(x+i,y+j);
+			if(abc[c]&1<<i+j*3)glVertex2i(x+i,y+j);
 }
 void tfDraw(int x,int y,char*s){
 	int xo=0;
@@ -181,13 +241,14 @@ void tfDraw(int x,int y,char*s){
 		case'\n':
 			xo=0;
 		case'\v':
-			y+=7;
+			y+=6;
 		continue;case'\t':
-			xo+=12;
-		continue;case'A'...'Z':tfChar(x+xo,y,*s-'A');
+			xo+=8;
+		continue;case'0'...'9':tfChar(x+xo,y,*s-'0'+26);
+		break;case'A'...'Z':tfChar(x+xo,y,*s-'A');
 		break;case'a'...'z':tfChar(x+xo,y,*s-'a');
 		}
-		xo+=6;
+		xo+=4;
 	}
 	glEnd();
 }

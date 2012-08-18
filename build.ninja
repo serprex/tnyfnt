@@ -1,0 +1,10 @@
+rule cc
+ command=gcc -std=gnu99 -Os -march=native -s -ffast-math $in $of -o $out -lGL
+build tf5x5.o:cc tf5x5.c
+ of=-c
+build tf3x5.o:cc tf3x5.c
+ of=-c
+build test5x5:cc test.c tf5x5.o
+ of=-lX11
+build test3x5:cc test.c tf3x5.o
+ of=-lX11
